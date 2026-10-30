@@ -1,1 +1,182 @@
 @import "tailwindcss";
+@theme {
+    --font-display: var(--font-NHG-display);
+    --font-headline: var(--font-NHG-display);
+    --font-body: var(--font-NHG-text);
+    --font-display--font-weight: 500;
+    --font-headline--font-weight: 500;
+    --font-body--font-weight: 400;
+    --type-display: clamp(4rem, 3.333vw + 3.333rem, 6rem);
+    --type-h1: clamp(3rem, 3.333vw + 2.333rem, 5rem);
+    --type-h2: clamp(2.5rem, 2.5vw + 2rem, 4rem);
+    --type-h3: clamp(2rem, 1.667vw + 1.667rem, 3rem);
+    --type-h4: clamp(1.5rem, 0.833vw + 1.333rem, 2rem);
+    --type-h5: clamp(1.25rem, 0.417vw + 1.167rem, 1.5rem);
+    --type-h6: clamp(1rem, 0.417vw + 0.917rem, 1.25rem);
+    --type-role: clamp(1rem, 2.094vw + 0.489rem, 2.5rem);
+    --type-large: clamp(1.25rem, 0.417vw + 1.167rem, 1.5rem);
+    --type-medium: clamp(1.125rem, 0.208vw + 1.083rem, 1.25rem);
+    --type-base: 1rem;
+    --type-small: 0.875rem;
+    --type-xsmall: 0.75rem;
+    --type-action: var(--type-xsmall);
+    --type-label: var(--type-xsmall);
+    --type-display--line-height: 0.95;
+    --type-h1--line-height: 0.975;
+    --type-h2--line-height: 1;
+    --type-h3--line-height: 1.025;
+    --type-h4--line-height: 1.05;
+    --type-h5--line-height: 1.125;
+    --type-h6--line-height: 1.2;
+    --type-role--line-height: 1;
+    --type-large--line-height: 1.4;
+    --type-medium--line-height: 1.425;
+    --type-base--line-height: 1.45;
+    --type-small--line-height: 1.475;
+    --type-xsmall--line-height: 1.5;
+    --type-action--line-height: var(--type-xsmall--line-height);
+    --type-label--line-height: var(--type-xsmall--line-height);
+    --type-display--letter-spacing: -0.04em;
+    --type-h1--letter-spacing: -0.035em;
+    --type-h2--letter-spacing: -0.03em;
+    --type-h3--letter-spacing: -0.0225em;
+    --type-h4--letter-spacing: -0.015em;
+    --type-h5--letter-spacing: -0.005em;
+    --type-h6--letter-spacing: 0.005em;
+    --type-role--letter-spacing: -0.02em;
+    --type-small--letter-spacing: 0.02em;
+    --type-xsmall--letter-spacing: 0.03em;
+    --type-action--letter-spacing: 0.05em;
+    --type-label--letter-spacing: var(--type-action--letter-spacing);
+}
+@layer base {
+    body {
+        font-family: var(--font-body);
+        font-weight: var(--font-body--font-weight);
+        font-size: var(--type-base);
+        line-height: var(--type-base--line-height);
+        color: var(--color-neutral-950);
+        background-color: var(--color-neutral-50);
+    }
+    h1, h2, h3, h4, h5, h6 {
+        font-family: var(--font-headline);
+        font-weight: var(--font-headline--font-weight);
+    }
+    h1 {
+        font-size: var(--type-h1);
+        line-height: var(--type-h1--line-height);
+        letter-spacing: var(--type-h1--letter-spacing);
+    }
+    h2 {
+        font-size: var(--type-h2);
+        line-height: var(--type-h2--line-height);
+        letter-spacing: var(--type-h2--letter-spacing);
+    }
+    h3 {
+        font-size: var(--type-h3);
+        line-height: var(--type-h3--line-height);
+        letter-spacing: var(--type-h3--letter-spacing);
+    }
+    h4 {
+        font-size: var(--type-h4);
+        line-height: var(--type-h4--line-height);
+        letter-spacing: var(--type-h4--letter-spacing);
+    }
+    h5 {
+        font-size: var(--type-h5);
+        line-height: var(--type-h5--line-height);
+        letter-spacing: var(--type-h5--letter-spacing);
+    }
+    h6 {
+        font-size: var(--type-h6);
+        line-height: var(--type-h6--line-height);
+        letter-spacing: var(--type-h6--letter-spacing);
+    }
+}
+@utility text-display {
+    font-family: var(--font-display);
+    font-weight: var(--font-display--font-weight);
+    font-size: var(--type-display);
+    line-height: var(--type-display--line-height);
+    letter-spacing: var(--type-display--letter-spacing);
+}
+@utility text-h1 {
+    font-family: var(--font-display);
+    font-weight: var(--font-headline--font-weight);
+    font-size: var(--type-h1);
+    line-height: var(--type-h1--line-height);
+    letter-spacing: var(--type-h1--letter-spacing);
+}
+@utility text-h2 {
+    font-family: var(--font-display);
+    font-weight: var(--font-headline--font-weight);
+    font-size: var(--type-h2);
+    line-height: var(--type-h2--line-height);
+    letter-spacing: var(--type-h2--letter-spacing);
+}
+@utility text-h3 {
+    font-family: var(--font-display);
+    font-weight: var(--font-headline--font-weight);
+    font-size: var(--type-h3);
+    line-height: var(--type-h3--line-height);
+    letter-spacing: var(--type-h3--letter-spacing);
+}
+@utility text-h4 {
+    font-family: var(--font-display);
+    font-weight: var(--font-headline--font-weight);
+    font-size: var(--type-h4);
+    line-height: var(--type-h4--line-height);
+    letter-spacing: var(--type-h4--letter-spacing);
+}
+@utility text-h5 {
+    font-family: var(--font-display);
+    font-weight: var(--font-headline--font-weight);
+    font-size: var(--type-h5);
+    line-height: var(--type-h5--line-height);
+    letter-spacing: var(--type-h5--letter-spacing);
+}
+@utility text-h6 {
+    font-family: var(--font-display);
+    font-weight: var(--font-headline--font-weight);
+    font-size: var(--type-h6);
+    line-height: var(--type-h6--line-height);
+    letter-spacing: var(--type-h6--letter-spacing);
+}
+@utility text-role {
+    font-family: var(--font-headline);
+    font-weight: var(--font-headline--font-weight);
+    font-size: var(--type-role);
+    line-height: var(--type-role--line-height);
+    letter-spacing: var(--type-role--letter-spacing);
+    text-transform: uppercase;
+}
+@utility text-large {
+    font-size: var(--type-large);
+    line-height: var(--type-large--line-height);
+}
+@utility text-medium {
+    font-size: var(--type-medium);
+    line-height: var(--type-medium--line-height);
+}
+@utility text-small {
+    font-size: var(--type-small);
+    line-height: var(--type-small--line-height);
+    letter-spacing: var(--type-small--letter-spacing);
+}
+@utility text-xsmall {
+    font-size: var(--type-xsmall);
+    line-height: var(--type-xsmall--line-height);
+    letter-spacing: var(--type-xsmall--letter-spacing);
+}
+@utility text-action {
+    font-size: var(--type-action);
+    line-height: var(--type-action--line-height);
+    letter-spacing: var(--type-action--letter-spacing);
+    text-transform: uppercase;
+}
+@utility text-label {
+    font-size: var(--type-label);
+    line-height: var(--type-label--line-height);
+    letter-spacing: var(--type-label--letter-spacing);
+    text-transform: uppercase;
+}

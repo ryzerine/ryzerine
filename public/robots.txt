@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://ryzerine.com/sitemap-index.xml

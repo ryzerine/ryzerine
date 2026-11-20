@@ -1,0 +1,59 @@
+---
+import { Font } from 'astro:assets';
+import type { Thing } from 'schema-dts';
+import { SITE_NAME, buildSchemaGraph, serializeSchema } from '../lib/schema';
+interface Props {
+    title: string;
+    description: string;
+    image?: string;
+    imageAlt?: string;
+    canonicalURL?: string | URL;
+    type?: string;
+    schema?: Thing | Thing[];
+}
+const {
+    title,
+    description,
+    image = '/ryzerine-og.jpg',
+    imageAlt = title,
+    canonicalURL: canonicalProp,
+    type = 'website',
+    schema,
+} = Astro.props;
+const site = Astro.site;
+if (!site) throw new Error('Set `site` in astro.config.mjs');
+const canonicalURL = canonicalProp ? new URL(canonicalProp, site) : new URL(Astro.url.pathname, site);
+const socialImageURL = new URL(image, site);
+const jsonLd = serializeSchema(buildSchemaGraph(site, schema));
+---
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="generator" content={Astro.generator} />
+<meta name="theme-color" content="#ffffff" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="robots" content="index, follow" />
+<link rel="canonical" href={canonicalURL} />
+<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap-index.xml" />
+<meta property="og:site_name" content={SITE_NAME} />
+<meta property="og:locale" content="en_US" />
+<meta property="og:type" content={type} />
+<meta property="og:url" content={canonicalURL} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={socialImageURL} />
+<meta property="og:image:alt" content={imageAlt} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:url" content={canonicalURL} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={socialImageURL} />
+<meta name="twitter:image:alt" content={imageAlt} />
+<link rel="icon" href="/favicon.ico" sizes="any" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<script is:inline type="application/ld+json" set:html={jsonLd} />
+<Font cssVariable="--font-NHG-display" preload={[{ weight: "500", style: "normal" }]} />
+<Font cssVariable="--font-NHG-text" preload={[{ weight: "400", style: "normal" }]} />

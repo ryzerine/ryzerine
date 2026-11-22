@@ -1,12 +1,17 @@
 import type { Graph, Thing, Person, WebSite } from 'schema-dts';
 export const SITE_NAME = 'Azriel De Ryzerine';
+export const SITE_DESCRIPTION = 'Azriel De Ryzerine is a musician, artisan and producer';
+export const SITE_LANG = 'en';
 const person = {
     name: SITE_NAME,
     image: '/ryzerine.jpg',
+    jobTitle: 'Musician, Digital Artisan, and Producer',
+    knowsAbout: ['React', 'Astro', 'UI/UX Design', 'Music Production', 'Music'],
     sameAs: [
         'https://github.com/ryzerine',
         'https://youtube.com/@ryzerine',
         'https://pinterest.com/ryzerine',
+        'https://medium.com/@ryzerine',
     ],
 };
 export function getSchemaIds(site: URL) {
@@ -23,6 +28,8 @@ export function buildSchemaGraph(site: URL, extra?: Thing | Thing[]): Graph {
         '@id': ids.website,
         url: siteURL,
         name: SITE_NAME,
+        description: SITE_DESCRIPTION,
+        inLanguage: SITE_LANG,
         publisher: { '@id': ids.person },
     };
     const personNode: Person = {
@@ -31,6 +38,9 @@ export function buildSchemaGraph(site: URL, extra?: Thing | Thing[]): Graph {
         name: person.name,
         url: siteURL,
         image: new URL(person.image, site).toString(),
+        description: SITE_DESCRIPTION,
+        jobTitle: person.jobTitle,
+        knowsAbout: person.knowsAbout,
         sameAs: person.sameAs,
     };
     return {

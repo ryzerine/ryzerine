@@ -14,7 +14,13 @@ if (!ADOBE_FONTS_ID) {
 const adobe = fontProviders.adobe({ id: ADOBE_FONTS_ID });
 export default defineConfig({
   site: 'https://ryzerine.com',
-  integrations: [sitemap(), icon()],
+  trailingSlash: 'always',
+  integrations: [
+    sitemap({
+      filter: (page) => !page.includes('/404'),
+    }), 
+    icon()
+  ],
   fonts: [{
     provider: adobe,
     name: 'Neue Haas Grotesk Display',

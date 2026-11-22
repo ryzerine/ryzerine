@@ -5,6 +5,7 @@
     --font-body: var(--font-NHG-text);
 }
 @theme {
+    --text-*: initial;
     --type-weight-display: 500;
     --type-weight-headline: 500;
     --type-weight-body: 400;
@@ -53,6 +54,9 @@
     --color-dark: oklch(14.5% 0 none);
 }
 @layer base {
+    html {
+        font-synthesis: none;
+    }
     body {
         font-family: var(--font-body);
         font-weight: var(--type-weight-body);

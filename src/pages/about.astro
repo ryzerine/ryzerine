@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getSchemaIds } from '../lib/schema';
+import type { ProfilePage } from 'schema-dts';
+const site = Astro.site;
+if (!site) throw new Error('Set `site` in astro.config.mjs');
+const ids = getSchemaIds(site);
+const schema: ProfilePage = {
+    '@type': 'ProfilePage',
+    '@id': new URL('/about/', site).toString() + '#webpage',
+    url: new URL('/about/', site).toString(),
+    name: 'About Azriel De Ryzerine',
+    isPartOf: { '@id': ids.website },
+    mainEntity: { '@id': ids.person },
+};
+const title = "About";
+const description = "About";
+---
+<Layout title={title} description={description} schema={schema}></Layout>

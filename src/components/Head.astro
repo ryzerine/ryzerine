@@ -5,25 +5,41 @@ import { SITE_NAME, buildSchemaGraph, serializeSchema } from '../lib/schema';
 interface Props {
     title: string;
     description: string;
-    image?: string;
-    imageAlt?: string;
+    noindex?: boolean;
     canonicalURL?: string | URL;
+    locale?: string;
     type?: string;
+    image?: string;
+    imageWidth?: number;
+    imageHeight?: number;
+    imageAlt?: string;
     schema?: Thing | Thing[];
 }
+const DEFAULT_IMAGE = '/ryzerine-og.jpg';
 const {
     title,
     description,
-    image = '/ryzerine-og.jpg',
-    imageAlt = title,
+    noindex = false,
     canonicalURL: canonicalProp,
+    locale = 'en_US',
     type = 'website',
+    image = DEFAULT_IMAGE,
+    imageWidth = image === DEFAULT_IMAGE ? 1200 : undefined,
+    imageHeight = image === DEFAULT_IMAGE ? 630 : undefined,
+    imageAlt = title,
     schema,
 } = Astro.props;
 const site = Astro.site;
 if (!site) throw new Error('Set `site` in astro.config.mjs');
 const canonicalURL = canonicalProp ? new URL(canonicalProp, site) : new URL(Astro.url.pathname, site);
 const socialImageURL = new URL(image, site);
+const imageTypes: Record<string, string> = {
+    jpg: 'image/jpeg',
+    jpeg: 'image/jpeg',
+    png: 'image/png',
+    webp: 'image/webp',
+};
+const imageType = imageTypes[image.split('.').pop()?.toLowerCase() ?? ''];
 const jsonLd = serializeSchema(buildSchemaGraph(site, schema));
 ---
 <meta charset="utf-8" />
@@ -32,22 +48,21 @@ const jsonLd = serializeSchema(buildSchemaGraph(site, schema));
 <meta name="theme-color" content="#ffffff" />
 <title>{title}</title>
 <meta name="description" content={description} />
-<meta name="robots" content="index, follow" />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
 <link rel="canonical" href={canonicalURL} />
 <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap-index.xml" />
 <meta property="og:site_name" content={SITE_NAME} />
-<meta property="og:locale" content="en_US" />
+<meta property="og:locale" content={locale} />
 <meta property="og:type" content={type} />
 <meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={socialImageURL} />
+{imageWidth && <meta property="og:image:width" content={String(imageWidth)} />}
+{imageHeight && <meta property="og:image:height" content={String(imageHeight)} />}
+{imageType && <meta property="og:image:type" content={imageType} />}
 <meta property="og:image:alt" content={imageAlt} />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:url" content={canonicalURL} />
-<meta name="twitter:title" content={title} />
-<meta name="twitter:description" content={description} />
-<meta name="twitter:image" content={socialImageURL} />
 <meta name="twitter:image:alt" content={imageAlt} />
 <link rel="icon" href="/favicon.ico" sizes="any" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />

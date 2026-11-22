@@ -1,26 +1,30 @@
 ---
 import type { ComponentProps } from 'astro/types';
 import '../styles/global.css';
-import BaseHead from '../components/BaseHead.astro';
+import Head from '../components/Head.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-type BaseHeadProps = ComponentProps<typeof BaseHead>;
-interface Props extends BaseHeadProps {
+type HeadProps = Omit<ComponentProps<typeof Head>, 'locale'>;
+interface Props extends HeadProps {
     lang?: string;
 }
+const ogLocales: Record<string, string> = {
+    en: 'en_US'
+};
 const {
     lang = 'en',
     ...headProps
 } = Astro.props;
+const locale = ogLocales[lang] ?? 'en_US';
 ---
 <!DOCTYPE html>
 <html lang={lang} class="h-full antialiased">
     <head>
-        <BaseHead {...headProps} />
+        <Head {...headProps} locale={locale} />
     </head>
     <body class="min-h-full flex flex-col">
         <Header />
-        <main class="relative z-95 flex-1">
+        <main class="relative z-90 flex-1">
             <slot />
         </main>
         <Footer />

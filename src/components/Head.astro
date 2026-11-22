@@ -39,7 +39,7 @@ const imageTypes: Record<string, string> = {
     png: 'image/png',
     webp: 'image/webp',
 };
-const imageType = imageTypes[image.split('.').pop()?.toLowerCase() ?? ''];
+const imageType = imageTypes[socialImageURL.pathname.split('.').pop()?.toLowerCase() ?? ''];
 const jsonLd = serializeSchema(buildSchemaGraph(site, schema));
 ---
 <meta charset="utf-8" />

@@ -4,6 +4,7 @@ import '../styles/global.css';
 import Head from '../components/Head.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { SITE_LANG } from '../lib/schema';
 type HeadProps = Omit<ComponentProps<typeof Head>, 'locale'>;
 interface Props extends HeadProps {
     lang?: string;
@@ -12,7 +13,7 @@ const ogLocales: Record<string, string> = {
     en: 'en_US'
 };
 const {
-    lang = 'en',
+    lang = SITE_LANG,
     ...headProps
 } = Astro.props;
 const locale = ogLocales[lang] ?? 'en_US';

@@ -5,10 +5,11 @@ import type { ProfilePage } from 'schema-dts';
 const site = Astro.site;
 if (!site) throw new Error('Set `site` in astro.config.mjs');
 const ids = getSchemaIds(site);
+const pageURL = new URL(Astro.url.pathname, site).toString();
 const schema: ProfilePage = {
     '@type': 'ProfilePage',
-    '@id': new URL('/about/', site).toString() + '#webpage',
-    url: new URL('/about/', site).toString(),
+    '@id': pageURL + '#webpage',
+    url: pageURL,
     name: 'About Azriel De Ryzerine',
     isPartOf: { '@id': ids.website },
     mainEntity: { '@id': ids.person },

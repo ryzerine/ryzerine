@@ -4,8 +4,9 @@
     --font-headline: var(--font-NHG-display);
     --font-body: var(--font-NHG-text);
 }
-@theme {
+@theme static {
     --text-*: initial;
+    --color-*: initial;
     --type-weight-display: 500;
     --type-weight-headline: 500;
     --type-weight-body: 400;
@@ -44,6 +45,9 @@
     --type-h4--letter-spacing: -0.015em;
     --type-h5--letter-spacing: -0.005em;
     --type-h6--letter-spacing: 0.005em;
+    --type-large--letter-spacing: 0em;
+    --type-medium--letter-spacing: 0em;
+    --type-base--letter-spacing: 0em;
     --type-small--letter-spacing: 0.02em;
     --type-xsmall--letter-spacing: 0.03em;
     --type-action--letter-spacing: 0.05em;
@@ -62,6 +66,7 @@
         font-weight: var(--type-weight-body);
         font-size: var(--type-base);
         line-height: var(--type-base--line-height);
+        letter-spacing: var(--type-base--letter-spacing);
         color: var(--color-ink);
         background-color: var(--color-surface);
     }
@@ -150,30 +155,51 @@
     letter-spacing: var(--type-h6--letter-spacing);
 }
 @utility text-large {
+    font-family: var(--font-body);
+    font-weight: var(--type-weight-body);
     font-size: var(--type-large);
     line-height: var(--type-large--line-height);
+    letter-spacing: var(--type-large--letter-spacing);
 }
 @utility text-medium {
+    font-family: var(--font-body);
+    font-weight: var(--type-weight-body);
     font-size: var(--type-medium);
     line-height: var(--type-medium--line-height);
+    letter-spacing: var(--type-medium--letter-spacing);
+}
+@utility text-base {
+    font-family: var(--font-body);
+    font-weight: var(--type-weight-body);
+    font-size: var(--type-base);
+    line-height: var(--type-base--line-height);
+    letter-spacing: var(--type-base--letter-spacing);
 }
 @utility text-small {
+    font-family: var(--font-body);
+    font-weight: var(--type-weight-body);
     font-size: var(--type-small);
     line-height: var(--type-small--line-height);
     letter-spacing: var(--type-small--letter-spacing);
 }
 @utility text-xsmall {
+    font-family: var(--font-body);
+    font-weight: var(--type-weight-body);
     font-size: var(--type-xsmall);
     line-height: var(--type-xsmall--line-height);
     letter-spacing: var(--type-xsmall--letter-spacing);
 }
 @utility text-action {
+    font-family: var(--font-body);
+    font-weight: var(--type-weight-body);
     font-size: var(--type-action);
     line-height: var(--type-action--line-height);
     letter-spacing: var(--type-action--letter-spacing);
     text-transform: uppercase;
 }
 @utility text-label {
+    font-family: var(--font-body);
+    font-weight: var(--type-weight-body);
     font-size: var(--type-label);
     line-height: var(--type-label--line-height);
     letter-spacing: var(--type-label--letter-spacing);
